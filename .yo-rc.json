@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Sergey Epifanov",
+      "authorEmail": "sergeysven1@gmail.com",
+      "authorUrl": "https://github.com/epifanov-sergey/"
+    }
+  }
+}
