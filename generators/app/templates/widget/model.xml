@@ -4,7 +4,7 @@
         <contextItemName>[BBHOST]</contextItemName>
         <properties>
             <property label="Title" name="title" type="string">
-                <value type="string"><%= name %></value>
+                <value type="string"><%= title %></value>
             </property>
             <property name="src" type="string">
                 <value type="string">$(itemRoot)/index.hbs</value>

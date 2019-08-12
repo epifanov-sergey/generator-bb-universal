@@ -29,7 +29,12 @@ module.exports = class extends Generator {
       {
         type: "input",
         name: "name",
-        message: "Enter your component's name"
+        message: "Enter component's name"
+      },
+      {
+        type: "input",
+        name: "title",
+        message: "Enter component's title"
       }
     ];
 
@@ -57,26 +62,5 @@ module.exports = class extends Generator {
       `${destination}/readme.md`,
       this.props
     );
-  }
-
-  install() {
-    this.installDependencies()
-      .then(() => {
-        this.log(yosay("The dependencies successfully installed"));
-      })
-      .catch(err => {
-        this.log(
-          yosay(
-            `
-  Installing
-  of
-  dependencies
-  finished
-  with
-  errors: ${err.toString()}
-`
-          )
-        );
-      });
   }
 };
