@@ -44,21 +44,42 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const template = `${this.templatePath(this.props.type)}`;
-    const destination = `${this.destinationPath(this.props.name)}`;
-    this.fs.copy(`${template}/media`, `${destination}/media`);
+    const sourceFolder = `${this.templatePath(this.props.type)}`;
+    const destinationFolder = `${this.destinationPath(this.props.name)}`;
+    this.copyMedia(sourceFolder, destinationFolder);
+    this.copyScripts(sourceFolder, destinationFolder);
+    this.copyTemplate(sourceFolder, destinationFolder);
+    this.copyModel(sourceFolder, destinationFolder);
+    this.copyReadme(sourceFolder, destinationFolder);
+  }
+
+  copyMedia(source, destination) {
+    this.fs.copy(`${source}/media`, `${destination}/media`);
+  }
+
+  copyScripts(source, destination) {
+    this.fs.copy(`${source}/scripts`, `${destination}/scripts`);
+  }
+
+  copyTemplate(source, destination) {
     this.fs.copyTpl(
-      `${template}/index.hbs`,
+      `${source}/index.hbs`,
       `${destination}/index.hbs`,
       this.props
     );
+  }
+
+  copyModel(source, destination) {
     this.fs.copyTpl(
-      `${template}/model.xml`,
+      `${source}/model.xml`,
       `${destination}/model.xml`,
       this.props
     );
+  }
+
+  copyReadme(source, destination) {
     this.fs.copyTpl(
-      `${template}/readme.md`,
+      `${source}/readme.md`,
       `${destination}/readme.md`,
       this.props
     );
