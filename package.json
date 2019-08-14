@@ -9,9 +9,9 @@
     "url": "https://github.com/epifanov-sergey/"
   },
   "files": [
-    "generators"
+    "app"
   ],
-  "main": "generators/index.js",
+  "main": "app/index.js",
   "keywords": [
     "yeoman-generator",
     "yeoman",
