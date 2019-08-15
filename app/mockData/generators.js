@@ -28,5 +28,32 @@ module.exports = [
         regexp: [`# Виджет ${answers.widget.title}`, `${answers.widget.name}`]
       }
     ]
+  },
+  {
+    type: answers.container.type,
+    files: [
+      "model.xml",
+      "index.hbs",
+      "readme.md",
+      `media${path.sep}icon.png`,
+      `scripts${path.sep}index.js`
+    ],
+    templates: [
+      {
+        file: "model.xml",
+        regexp: [`<value type="string">${answers.container.title}</value>`]
+      },
+      {
+        file: "index.hbs",
+        regexp: [
+          `<title>${answers.container.title}</title>`,
+          `<body onload="window['${answers.container.name}'](widget);">`
+        ]
+      },
+      {
+        file: "readme.md",
+        regexp: [`# Контейнер ${answers.container.title}`]
+      }
+    ]
   }
 ];

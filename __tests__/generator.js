@@ -24,7 +24,8 @@ const deleteTemplate = type => {
 
 beforeAll(async () => {
   const types = mockGenerators.map(({ type }) => type);
-  await Promise.all(types.map(type => createTemplate(type)));
+  const tasks = types.map(type => createTemplate(type));
+  await Promise.all(tasks);
 });
 
 describe("generator-bb-universal tests", () => {

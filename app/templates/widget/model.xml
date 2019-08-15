@@ -3,7 +3,7 @@
         <name><%= name %></name>
         <contextItemName>[BBHOST]</contextItemName>
         <properties>
-            <property label="Title" name="title" type="string">
+            <property label="Title" name="title" type="string" viewHint="input=text-input,role=manager">
                 <value type="string"><%= title %></value>
             </property>
             <property name="src" type="string">

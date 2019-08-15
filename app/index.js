@@ -13,20 +13,47 @@ module.exports = class extends Generator {
 
     return this.prompt(prompts).then(props => {
       this.props = props;
+      this.sourceFolder = `${this.templatePath(this.props.type)}`;
+      this.destinationFolder = `${this.destinationPath(this.props.name)}`;
     });
   }
 
   writing() {
-    const sourceFolder = `${this.templatePath(this.props.type)}`;
-    const destinationFolder = `${this.destinationPath(this.props.name)}`;
+    switch (this.props.type) {
+      case "widget":
+        this.generateWidget();
+        break;
+      case "container":
+        this.generateContainer();
+        break;
+      case "feature":
+        break;
+      default:
+        break;
+    }
+  }
+
+  generateWidget() {
     const filesForCopy = ["media", "scripts"];
     const templatesForCopy = ["index.hbs", "model.xml", "readme.md"];
-    this.copyFiles(filesForCopy, sourceFolder, destinationFolder);
+    this.copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
     this.copyTemplates(
       templatesForCopy,
       this.props,
-      sourceFolder,
-      destinationFolder
+      this.sourceFolder,
+      this.destinationFolder
+    );
+  }
+
+  generateContainer() {
+    const filesForCopy = ["media", "scripts"];
+    const templatesForCopy = ["index.hbs", "model.xml", "readme.md"];
+    this.copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
+    this.copyTemplates(
+      templatesForCopy,
+      this.props,
+      this.sourceFolder,
+      this.destinationFolder
     );
   }
 

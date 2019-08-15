@@ -1,0 +1,19 @@
+<catalog>
+    <container>
+        <name><%= name %></name>
+        <properties>
+            <property name="thumbnailUrl" type="string">
+                <value>$(itemRoot)/media/icon.png</value>
+            </property>
+            <property label="Title" name="title" type="string" viewHint="input=text-input,role=manager">
+              <value type="string"><%= title %></value>
+            </property>
+            <property name="src" type="string">
+                <value>$(itemRoot)/index.hbs</value>
+            </property>
+            <property name="version" type="string">
+              <value type="string">0.1.0-alpha.0</value>
+            </property>
+        </properties>
+    </container>
+</catalog>
