@@ -8,5 +8,10 @@ module.exports = {
     type: "container",
     name: "TestContainer",
     title: "Тестовый контейнер"
+  },
+  feature: {
+    type: "feature",
+    name: "TestFeature",
+    title: "Тестовая фича"
   }
 };

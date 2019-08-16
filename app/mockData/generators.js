@@ -55,5 +55,22 @@ module.exports = [
         regexp: [`# Контейнер ${answers.container.title}`]
       }
     ]
+  },
+  {
+    type: answers.feature.type,
+    files: ["model.xml", "readme.md", `scripts${path.sep}index.js`],
+    templates: [
+      {
+        file: "model.xml",
+        regexp: [
+          `<name>${answers.feature.name}</name>`,
+          `<value type="string">${answers.feature.title}</value>`
+        ]
+      },
+      {
+        file: "readme.md",
+        regexp: [`# Фича ${answers.feature.title}`]
+      }
+    ]
   }
 ];

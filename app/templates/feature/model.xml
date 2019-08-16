@@ -1,0 +1,10 @@
+<catalog>
+    <feature>
+        <name><%= name %></name>
+        <properties>
+            <property name="title">
+                <value type="string"><%= title %></value>
+            </property>
+        </properties>
+    </feature>
+</catalog>

@@ -6,13 +6,7 @@ module.exports = [
     type: "list",
     name: "type",
     message: "What type of BackBase components are you want to create?",
-    choices: templates.map(template => {
-      if (template === "feature") {
-        return { name: template, disabled: "Unavailable at this time" };
-      }
-
-      return template;
-    })
+    choices: templates
   },
   {
     type: "input",

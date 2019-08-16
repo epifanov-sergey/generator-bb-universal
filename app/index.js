@@ -1,4 +1,5 @@
 "use strict";
+const path = require("path");
 const Generator = require("yeoman-generator");
 const chalk = require("chalk");
 const yosay = require("yosay");
@@ -21,23 +22,24 @@ module.exports = class extends Generator {
   writing() {
     switch (this.props.type) {
       case "widget":
-        this.generateWidget();
+        this._generateWidget();
         break;
       case "container":
-        this.generateContainer();
+        this._generateContainer();
         break;
       case "feature":
+        this._generateFeature();
         break;
       default:
         break;
     }
   }
 
-  generateWidget() {
+  _generateWidget() {
     const filesForCopy = ["media", "scripts"];
     const templatesForCopy = ["index.hbs", "model.xml", "readme.md"];
-    this.copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
-    this.copyTemplates(
+    this._copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
+    this._copyTemplates(
       templatesForCopy,
       this.props,
       this.sourceFolder,
@@ -45,11 +47,11 @@ module.exports = class extends Generator {
     );
   }
 
-  generateContainer() {
+  _generateContainer() {
     const filesForCopy = ["media", "scripts"];
     const templatesForCopy = ["index.hbs", "model.xml", "readme.md"];
-    this.copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
-    this.copyTemplates(
+    this._copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
+    this._copyTemplates(
       templatesForCopy,
       this.props,
       this.sourceFolder,
@@ -57,19 +59,34 @@ module.exports = class extends Generator {
     );
   }
 
-  copyFiles(files = [], sourceFolder = "", destinationFolder = "") {
+  _generateFeature() {
+    const filesForCopy = ["scripts"];
+    const templatesForCopy = ["model.xml", "readme.md"];
+    this._copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
+    this._copyTemplates(
+      templatesForCopy,
+      this.props,
+      this.sourceFolder,
+      this.destinationFolder
+    );
+  }
+
+  _copyFiles(files = [], sourceFolder = "", destinationFolder = "") {
     if (
       Array.isArray(files) &&
       isString(sourceFolder) &&
       isString(destinationFolder)
     ) {
       files.forEach(file => {
-        this.fs.copy(`${sourceFolder}/${file}`, `${destinationFolder}/${file}`);
+        this.fs.copy(
+          `${sourceFolder}${path.sep}${file}`,
+          `${destinationFolder}${path.sep}${file}`
+        );
       });
     }
   }
 
-  copyTemplates(
+  _copyTemplates(
     templates = [],
     values = {},
     sourceFolder = "",
@@ -83,8 +100,8 @@ module.exports = class extends Generator {
     )
       templates.forEach(template => {
         this.fs.copyTpl(
-          `${sourceFolder}/${template}`,
-          `${destinationFolder}/${template}`,
+          `${sourceFolder}${path.sep}${template}`,
+          `${destinationFolder}${path.sep}${template}`,
           values
         );
       });
