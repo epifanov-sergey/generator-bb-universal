@@ -14,7 +14,10 @@ module.exports = [
     templates: [
       {
         file: "model.xml",
-        regexp: [`<value type="string">${answers.widget.title}</value>`]
+        regexp: [
+          `<value type="string">${answers.widget.title}</value>`,
+          `<widget>`
+        ]
       },
       {
         file: "index.hbs",
@@ -41,7 +44,10 @@ module.exports = [
     templates: [
       {
         file: "model.xml",
-        regexp: [`<value type="string">${answers.container.title}</value>`]
+        regexp: [
+          `<value type="string">${answers.container.title}</value>`,
+          `<container>`
+        ]
       },
       {
         file: "index.hbs",
@@ -64,12 +70,31 @@ module.exports = [
         file: "model.xml",
         regexp: [
           `<name>${answers.feature.name}</name>`,
+          `<feature>`,
           `<value type="string">${answers.feature.title}</value>`
         ]
       },
       {
         file: "readme.md",
         regexp: [`# Фича ${answers.feature.title}`]
+      }
+    ]
+  },
+  {
+    type: answers.page.type,
+    files: ["model.xml", "readme.md", `media${path.sep}icon.png`, `scripts${path.sep}index.js`],
+    templates: [
+      {
+        file: "model.xml",
+        regexp: [
+          `<name>${answers.page.name}</name>`,
+          `<page>`,
+          `<value type="string">${answers.page.title}</value>`
+        ]
+      },
+      {
+        file: "readme.md",
+        regexp: [`# Страница ${answers.page.title}`]
       }
     ]
   }

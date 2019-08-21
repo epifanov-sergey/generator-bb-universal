@@ -30,45 +30,33 @@ module.exports = class extends Generator {
       case "feature":
         this._generateFeature();
         break;
+      case "page":
+        this._generatePage();
+        break;
       default:
         break;
     }
   }
 
   _generateWidget() {
-    const filesForCopy = ["media", "scripts"];
-    const templatesForCopy = ["index.hbs", "model.xml", "readme.md"];
-    this._copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
-    this._copyTemplates(
-      templatesForCopy,
-      this.props,
-      this.sourceFolder,
-      this.destinationFolder
-    );
+    this._copy(["media", "scripts"], ["index.hbs", "model.xml", "readme.md"]);
   }
 
   _generateContainer() {
-    const filesForCopy = ["media", "scripts"];
-    const templatesForCopy = ["index.hbs", "model.xml", "readme.md"];
-    this._copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
-    this._copyTemplates(
-      templatesForCopy,
-      this.props,
-      this.sourceFolder,
-      this.destinationFolder
-    );
+    this._copy(["media", "scripts"], ["index.hbs", "model.xml", "readme.md"]);
   }
 
   _generateFeature() {
-    const filesForCopy = ["scripts"];
-    const templatesForCopy = ["model.xml", "readme.md"];
-    this._copyFiles(filesForCopy, this.sourceFolder, this.destinationFolder);
-    this._copyTemplates(
-      templatesForCopy,
-      this.props,
-      this.sourceFolder,
-      this.destinationFolder
-    );
+    this._copy(["scripts"], ["model.xml", "readme.md"]);
+  }
+
+  _generatePage() {
+    this._copy(["scripts", "media", "index.hbs"], ["model.xml", "readme.md"]);
+  }
+
+  _copy(files = [], templates = []) {
+    this._copyFiles(files, this.sourceFolder, this.destinationFolder);
+    this._copyTemplates(templates, this.props, this.sourceFolder, this.destinationFolder);
   }
 
   _copyFiles(files = [], sourceFolder = "", destinationFolder = "") {

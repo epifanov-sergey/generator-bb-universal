@@ -13,5 +13,10 @@ module.exports = {
     type: "feature",
     name: "TestFeature",
     title: "Тестовая фича"
+  },
+  page: {
+    type: "page",
+    name: "TestPage",
+    title: "Тестовая страница"
   }
 };

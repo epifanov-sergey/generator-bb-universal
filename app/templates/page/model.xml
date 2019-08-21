@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalog>
+  <page>
+    <name><%= name %></name>
+    <properties>
+      <property name="title" label="Page Title" localizable="true" viewHint="role=manager,order=1">
+        <value type="string"><%= title %></value>
+      </property>
+      <property name="thumbnailUrl">
+        <value>$(itemRoot)/media/icon.png</value>
+      </property>
+      <property name="src">
+        <value>$(itemRoot)/index.hbs</value>
+      </property>
+   </properties>
+  </page>
+</catalog>
