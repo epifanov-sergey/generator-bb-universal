@@ -1,0 +1,20 @@
+<catalog>
+    <widget>
+        <name><%= name %></name>
+        <contextItemName>[BBHOST]</contextItemName>
+        <properties>
+            <property label="Title" name="title" type="string" viewHint="input=text-input,role=manager">
+                <value type="string"><%= title %></value>
+            </property>
+            <property name="src" type="string">
+                <value type="string">$(itemRoot)/index.hbs</value>
+            </property>
+            <property name="version" type="string">
+                <value type="string">0.1.0-alpha.0</value>
+            </property>
+            <property name="thumbnailUrl" type="string">
+                <value type="string">$(itemRoot)/media/icon.png</value>
+            </property>
+        </properties>
+    </widget>
+</catalog>

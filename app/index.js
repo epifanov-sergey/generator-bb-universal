@@ -8,55 +8,34 @@ const prompts = require("./prompts");
 
 module.exports = class extends Generator {
   prompting() {
-    this.log(
-      yosay(`Welcome to the ${chalk.red("generator-bb-universal")} generator!`)
-    );
+    this.log(yosay(`Welcome to the ${chalk.red("bb-universal")} generator!`));
 
     return this.prompt(prompts).then(props => {
       this.props = props;
-      this.sourceFolder = `${this.templatePath(this.props.type)}`;
+      this.sourceFolder = `${this.templatePath(this.props.type)}${path.sep}src`;
       this.destinationFolder = `${this.destinationPath(this.props.name)}`;
     });
   }
 
   writing() {
-    switch (this.props.type) {
-      case "widget":
-        this._generateWidget();
-        break;
-      case "container":
-        this._generateContainer();
-        break;
-      case "feature":
-        this._generateFeature();
-        break;
-      case "page":
-        this._generatePage();
-        break;
-      default:
-        break;
+    this._copy(this.props.type, this.sourceFolder, this.destinationFolder);
+  }
+
+  _copy(componentType = "", sourceFolder = "", destinationFolder = "") {
+    if (componentType) {
+      const {
+        schema: { templates, staticFiles } = {}
+      } = require(`./templates/${componentType}/config/schema`);
+      this._copyFiles(staticFiles, sourceFolder, destinationFolder);
+      this._copyTemplates(
+        templates,
+        this.props,
+        this.sourceFolder,
+        this.destinationFolder
+      );
+    } else {
+      throw new Error("Empty component's type");
     }
-  }
-
-  _generateWidget() {
-    this._copy(["media", "scripts"], ["index.hbs", "model.xml", "readme.md"]);
-  }
-
-  _generateContainer() {
-    this._copy(["media", "scripts"], ["index.hbs", "model.xml", "readme.md"]);
-  }
-
-  _generateFeature() {
-    this._copy(["scripts"], ["model.xml", "readme.md"]);
-  }
-
-  _generatePage() {
-    this._copy(["scripts", "media", "index.hbs"], ["model.xml", "readme.md"]);
-  }
-
-  _copy(files = [], templates = []) {
-    this._copyFiles(files, this.sourceFolder, this.destinationFolder);
-    this._copyTemplates(templates, this.props, this.sourceFolder, this.destinationFolder);
   }
 
   _copyFiles(files = [], sourceFolder = "", destinationFolder = "") {
